@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Key Lboyd</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0d12;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #121620;
+            border: 1px solid #1e2433;
+            border-radius: 16px;
+            padding: 24px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 42px;
+            height: 42px;
+            background-color: #ff6b00;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .title-group h2 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .title-group p {
+            font-size: 11px;
+            color: #7b88a1;
+            letter-spacing: 1px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: rgba(255, 107, 0, 0.15);
+            color: #ff8c38;
+            border: 1px solid rgba(255, 107, 0, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .main-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .sub-text {
+            font-size: 13px;
+            color: #9aa5b9;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .alert-box {
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10b981;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .key-label {
+            font-size: 11px;
+            color: #7b88a1;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .key-display {
+            background-color: #080a0e;
+            border: 1px solid #232a3b;
+            color: #ff6b00;
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 1px;
+            padding: 14px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 16px;
+            word-break: break-all;
+        }
+
+        .btn-copy {
+            width: 100%;
+            background-color: #ff6b00;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-bottom: 20px;
+        }
+
+        .btn-copy:hover {
+            background-color: #e56000;
+        }
+
+        .info-card {
+            background-color: #0d1017;
+            border-radius: 10px;
+            padding: 14px;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        .info-item {
+            display: flex;
+            margin-bottom: 8px;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            color: #7b88a1;
+            width: 90px;
+            flex-shrink: 0;
+        }
+
+        .info-value {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .btn-refresh {
+            width: 100%;
+            background-color: #181d2a;
+            color: #9aa5b9;
+            border: 1px solid #232a3b;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🛡️</div>
+            <div class="title-group">
+                <h2>Hệ Thống Key Lboyd</h2>
+                <p>KEY SYSTEM • V4.0</p>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="status-badge">✓ THÀNH CÔNG</div>
+        <div class="main-title">Key của bạn!</div>
+        <div class="sub-text">Lưu lại ngay — trang này sẽ không hiện lại key sau khi rời đi.</div>
+
+        <div class="alert-box">
+            <span>✓</span> Key đã được tạo thành công!
+        </div>
+
+        <span class="key-label">🔑 KEY CỦA BẠN</span>
+        <div class="key-display" id="keyBox">CHILLIHUBV2-LOADING...</div>
+
+        <button class="btn-copy" onclick="copyKey()">📋 Sao chép Key</button>
+
+        <!-- Thông tin Key -->
+        <div class="info-card">
+            <div style="color: #7b88a1; font-size: 11px; margin-bottom: 10px;">ℹ THÔNG TIN KEY</div>
+            <div class="info-item">
+                <span class="info-label">• Hiệu lực:</span>
+                <span class="info-value">Vĩnh viễn <span style="font-weight: normal; color: #7b88a1;">(không bao giờ hết hạn)</span></span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">• App:</span>
+                <span class="info-value">Delta-Chilli HUB</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">• Lưu ý:</span>
+                <span class="info-value">Nhập key vào để script kích hoạt</span>
+            </div>
+        </div>
+
+        <button class="btn-refresh" onclick="location.reload()">🔄 Lấy key mới</button>
+    </div>
+
+    <script>
+        // Hàm tự động tạo mã Key ngẫu nhiên theo định dạng CHILLIHUBV2-XXXXXX
+        function generateKey() {
+            const prefix = "CHILLIHUBV2-";
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            let result = "";
+            for (let i = 0; i < 6; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            document.getElementById("keyBox").innerText = prefix + result;
+        }
+
+        // Hàm Sao chép Key
+        function copyKey() {
+            const keyText = document.getElementById("keyBox").innerText;
+            navigator.clipboard.writeText(keyText);
+            alert("Đã sao chép Key: " + keyText);
+        }
+
+        // Chạy tạo key khi tải trang
+        generateKey();
+    </script>
+
+</body>
+</html>
